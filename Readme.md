@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Oleg Eremkin](https://up.htmlacademy.ru/javascript/28/user/1544057).
-* Наставник: `Неизвестно`.
+- Студент: [Oleg Eremkin](https://up.htmlacademy.ru/javascript/28/user/1544057).
+- Наставник: `Дмитрий (sench) Железцов`.
 
 ---
 
