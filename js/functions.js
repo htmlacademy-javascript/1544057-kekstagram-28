@@ -1,10 +1,4 @@
-
-const validateStringLength = function (str, maxLength) {
-  if (str.length <= maxLength) {
-    return true;
-  }
-  return false;
-};
+const validateStringLength = (str, maxLength) => str.length <= maxLength;
 
 // Cтрока короче 20 символов
 validateStringLength('проверяемая строка', 20); // true
@@ -13,9 +7,8 @@ validateStringLength('проверяемая строка', 18); // true
 // Строка длиннее 10 символов
 validateStringLength('проверяемая строка', 10); // false
 
-const isPalindrome = function (str) {
+const isPalindrome = (str) => {
   str = str.replace(/\s/g, '').toLowerCase();
-
   return str === str.split('').reverse().join('');
 };
 
@@ -28,9 +21,8 @@ isPalindrome('Кекс'); // false
 // Это палиндром
 isPalindrome('Лёша на полке клопа нашёл '); // true
 
-const extractNumbers = function (str) {
+const extractNumbers = (str) => {
   const numStr = String(str).match(/\d+/g)?.join('');
-
   return numStr ? parseInt(numStr, 10) : NaN;
 };
 
@@ -44,7 +36,7 @@ extractNumbers(2023); // 2023
 extractNumbers(-1); // 1
 extractNumbers(1.5); // 15
 
-const padString = function (str, minLength, padChars) {
+const padString = (str, minLength, padChars) => {
   if (str.length >= minLength) {
     return str;
   }
