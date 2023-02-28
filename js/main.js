@@ -57,9 +57,7 @@ const createComment = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const generatePhotoNum = getRandomIntGenerator(1, 25);
 const generatePhotoId = getRandomIntGenerator(1, 25);
-
 
 const createPhoto = () => {
   const id = generatePhotoId();
@@ -74,6 +72,4 @@ const createPhoto = () => {
   };
 };
 
-const arr = Array.from({ length: SIMILAR_PHOTO_COUNT }, createPhoto);
-
-
+Array.from({ length: SIMILAR_PHOTO_COUNT }, createPhoto);
