@@ -13,17 +13,19 @@ const generateCommentText = (messages, getRandomArrayElement) => {
 };
 
 
-const createComment = (consts, func) => {
-  const generateCommentId = func.getRandomIntGenerator(consts.minCommentId, consts.maxCommentId);
+const createComment = (param) => {
+  const { MIN_AVATAR, MAX_AVATAR, MIN_COMMENT_ID, MAX_COMMENT_ID, MESSAGES, NAMES } = param.consts;
+  const { getRandomArrayElement, getRandomInt, getRandomIntGenerator } = param.func;
+  const generateCommentId = getRandomIntGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
   return {
     id: generateCommentId(), //number
-    avatar: `img/avatar-${func.getRandomInt(consts.minAvatar, consts.maxAvatar)}.svg`,
-    message: generateCommentText(consts.messages, func.getRandomArrayElement), //
-    name: func.getRandomArrayElement(consts.names),
+    avatar: `img/avatar-${getRandomInt(MIN_AVATAR, MAX_AVATAR)}.svg`,
+    message: generateCommentText(MESSAGES, getRandomArrayElement), //
+    name: getRandomArrayElement(NAMES),
   };
 };
 
 
-const createComments = (consts, func) => Array.from({ length: func.getRandomInt(consts.minComents, consts.maxComents) }, () => createComment(consts, func));
+const createComments = (param) => Array.from({ length: param.func.getRandomInt(param.consts.MIN_COMMENTS, param.consts.MAX_COMMENTS) }, () => createComment(param));
 
 export { createComments };
