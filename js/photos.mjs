@@ -15,4 +15,4 @@ const createPhoto = (param) => {
 
 const createPhotos = (param) => Array.from({ length: param.consts.SIMILAR_PHOTO_COUNT }, () => createPhoto(param));
 
-export { createPhotos };
+export { createPhotos, createPhoto };
