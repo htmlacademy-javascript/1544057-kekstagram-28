@@ -15,7 +15,6 @@ const generateCommentText = (messages) => {
   return `${firstMessage} ${secondMessage ?? ''}`.trim();
 };
 
-
 const createComment = () => {
   const generateCommentId = getRandomIntGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
   return {
@@ -25,7 +24,6 @@ const createComment = () => {
     name: getRandomArrayElement(NAMES),
   };
 };
-
 
 const createComments = () => Array.from({ length: getRandomInt(MIN_COMMENTS, MAX_COMMENTS) }, () => createComment());
 
