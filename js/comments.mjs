@@ -1,4 +1,7 @@
-const generateCommentText = (messages, getRandomArrayElement) => {
+import { MIN_AVATAR, MAX_AVATAR, MIN_COMMENT_ID, MAX_COMMENT_ID, MIN_COMMENTS, MESSAGES, MAX_COMMENTS, NAMES } from './constants.mjs';
+import { getRandomInt, getRandomIntGenerator, getRandomArrayElement } from './utils.mjs';
+
+const generateCommentText = (messages) => {
   const firstMessage = getRandomArrayElement(messages);
   let secondMessage;
 
@@ -13,9 +16,7 @@ const generateCommentText = (messages, getRandomArrayElement) => {
 };
 
 
-const createComment = (param) => {
-  const { MIN_AVATAR, MAX_AVATAR, MIN_COMMENT_ID, MAX_COMMENT_ID, MESSAGES, NAMES } = param.consts;
-  const { getRandomArrayElement, getRandomInt, getRandomIntGenerator } = param.func;
+const createComment = () => {
   const generateCommentId = getRandomIntGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
   return {
     id: generateCommentId(), //number
@@ -26,6 +27,6 @@ const createComment = (param) => {
 };
 
 
-const createComments = (param) => Array.from({ length: param.func.getRandomInt(param.consts.MIN_COMMENTS, param.consts.MAX_COMMENTS) }, () => createComment(param));
+const createComments = () => Array.from({ length: getRandomInt(MIN_COMMENTS, MAX_COMMENTS) }, () => createComment());
 
 export { createComments };
