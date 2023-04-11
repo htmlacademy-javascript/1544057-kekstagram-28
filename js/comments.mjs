@@ -15,16 +15,15 @@ const generateCommentText = (messages) => {
   return `${firstMessage} ${secondMessage ?? ''}`.trim();
 };
 
-const createComment = () => {
+const createComment = (generateCommentId) => ({
+  id: generateCommentId(), //number
+  avatar: `img/avatar-${getRandomInt(MIN_AVATAR, MAX_AVATAR)}.svg`,
+  message: generateCommentText(MESSAGES, getRandomArrayElement), //
+  name: getRandomArrayElement(NAMES),
+});
+
+const createComments = () => {
   const generateCommentId = getRandomIntGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
-  return {
-    id: generateCommentId(), //number
-    avatar: `img/avatar-${getRandomInt(MIN_AVATAR, MAX_AVATAR)}.svg`,
-    message: generateCommentText(MESSAGES, getRandomArrayElement), //
-    name: getRandomArrayElement(NAMES),
-  };
+  return Array.from({ length: getRandomInt(MIN_COMMENTS, MAX_COMMENTS) }, () => createComment(generateCommentId));
 };
-
-const createComments = () => Array.from({ length: getRandomInt(MIN_COMMENTS, MAX_COMMENTS) }, () => createComment());
-
 export { createComments };
