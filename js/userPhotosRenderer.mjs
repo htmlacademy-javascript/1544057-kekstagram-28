@@ -12,6 +12,7 @@ const createPictureElement = (pictureData) => {
 
   pictureLink.href = pictureData.url;
   pictureImg.src = pictureData.url;
+  pictureImg.alt = pictureData.id;
   pictureLikes.textContent = pictureData.likes;
   pictureComments.textContent = pictureData.comments.length;
 
@@ -21,10 +22,10 @@ const createPictureElement = (pictureData) => {
 const renderUserPhotos = (picturesData) => {
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < picturesData.length; i++) {
-    const pictureElement = createPictureElement(picturesData[i]);
+  picturesData.forEach((e) => {
+    const pictureElement = createPictureElement(e);
     fragment.appendChild(pictureElement);
-  }
+  });
 
   picturesContainer.appendChild(fragment);
 };
