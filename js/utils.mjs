@@ -22,4 +22,11 @@ const getRandomIntGenerator = (min, max) => {
   };
 };
 
-export { getRandomInt, getRandomArrayElement, getRandomIntGenerator };
+const onEscKeyDown = (evt) => {
+  if (evt.key === 'Escape') {
+    return true;
+  }
+  return false;
+};
+
+export { getRandomInt, getRandomArrayElement, getRandomIntGenerator, onEscKeyDown };

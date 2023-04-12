@@ -1,4 +1,5 @@
-import { COMMENTS_SHOW_COUNT, IMG_WIDTH, IMG_HEIGHT } from './constants.mjs';
+import { COMMENTS_SHOW_COUNT, IMG_WIDTH, IMG_HEIGHT } from '../constants.mjs';
+import { onEscKeyDown } from '../utils.mjs';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgElement = bigPicture.querySelector('.big-picture__img img');
@@ -12,13 +13,6 @@ const commentsLoaderElement = bigPicture.querySelector('.comments-loader');
 const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-};
-
-const onEscKeyDown = (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    closeBigPicture();
-  }
 };
 
 const onCloseButtonClick = () => {
@@ -78,7 +72,12 @@ const renderBigPicture = (photoData) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  document.addEventListener('keydown', onEscKeyDown);
+  document.addEventListener('keydown', (event) => {
+    if (onEscKeyDown(event)) {
+      event.preventDefault();
+      closeBigPicture();
+    }
+  });
   bigPicture.querySelector('.big-picture__cancel').addEventListener('click', onCloseButtonClick);
 };
 
