@@ -6,6 +6,11 @@ const increaseBtn = formWrapper.querySelector('.scale__control--bigger');
 const scaleValue = formWrapper.querySelector('.scale__control--value');
 const previewImg = formWrapper.querySelector('.img-upload__preview img');
 
+export const resetImgScale = () => {
+  scaleValue.value = `${IMG_MAX_SCALE}%`;
+  previewImg.style.transform = 'scale(1)';
+};
+
 scaleValue.value = `${IMG_MAX_SCALE}%`;
 
 const extractNumbers = (param) => {
