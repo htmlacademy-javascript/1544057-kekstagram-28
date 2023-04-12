@@ -1,20 +1,23 @@
 const form = document.querySelector('.img-upload__overlay');
-const preview = form.querySelector('.img-upload__preview');
+const imgPreview = form.querySelector('.img-upload__preview');
 const intensityInput = form.querySelector('.effect-level__value');
 const slider = form.querySelector('.effect-level__slider');
 
 let lastFilterClass = '';
 
-const clearLastFilter = () => {
+const clearLastFilter = (destroy) => {
   if (lastFilterClass) {
-    preview.classList.remove(lastFilterClass);
-    preview.style.filter = '';
+    imgPreview.classList.remove(lastFilterClass);
+    imgPreview.style.filter = '';
+    if (destroy) {
+      slider.noUiSlider.destroy();
+    }
   }
 };
 
 const applyFilter = (filterName) => {
-  const filterClass = `effects__preview--${filterName}`;
-  preview.classList.add(filterClass);
+  const filterClass = `effects__imgPreview--${filterName}`;
+  imgPreview.classList.add(filterClass);
   lastFilterClass = filterClass;
 
   slider.noUiSlider.on('update', () => {
@@ -23,19 +26,19 @@ const applyFilter = (filterName) => {
 
     switch (filterName) {
       case 'chrome':
-        preview.style.filter = `grayscale(${value})`;
+        imgPreview.style.filter = `grayscale(${value})`;
         break;
       case 'sepia':
-        preview.style.filter = `sepia(${value})`;
+        imgPreview.style.filter = `sepia(${value})`;
         break;
       case 'marvin':
-        preview.style.filter = `invert(${value}%)`;
+        imgPreview.style.filter = `invert(${value}%)`;
         break;
       case 'phobos':
-        preview.style.filter = `blur(${value}px)`;
+        imgPreview.style.filter = `blur(${value}px)`;
         break;
       case 'heat':
-        preview.style.filter = `brightness(${value})`;
+        imgPreview.style.filter = `brightness(${value})`;
         break;
     }
 

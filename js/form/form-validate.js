@@ -1,12 +1,12 @@
 import { onEscKeyDown } from '../utils.mjs';
 import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.mjs';
 
-const uploadPictureForm = document.querySelector('.img-upload__form');
-const hastagForm = uploadPictureForm.querySelector('.text__hashtags');
-const commentForm = uploadPictureForm.querySelector('.text__description');
-const submitButton = uploadPictureForm.querySelector('.img-upload__submit');
+const uploadForm = document.querySelector('.img-upload__form');
+const hastagForm = uploadForm.querySelector('.text__hashtags');
+const commentForm = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
-const hashtagPristine = new Pristine(uploadPictureForm, {
+const hashtagPristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'form__item--invalid',
   errorTextParent: 'img-upload__field-wrapper',
@@ -54,7 +54,7 @@ hashtagPristine.addValidator(
   'Ошибка! Вы использовали одинаковые хэштеги'
 );
 
-uploadPictureForm.addEventListener('input', () => {
+uploadForm.addEventListener('input', () => {
   if (hashtagPristine.validate()) {
     submitButton.removeAttribute('disabled');
   } else {
