@@ -1,4 +1,6 @@
 import { onEscKeyDown } from '../utils.mjs';
+import './form-editor.js';
+import './form-validate.js';
 
 const pageBody = document.querySelector('body');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
