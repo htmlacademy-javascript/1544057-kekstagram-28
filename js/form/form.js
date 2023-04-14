@@ -1,8 +1,8 @@
-import { onEscKeyDown } from '../utils.mjs';
+import { onEscKeyDown } from '../utils.js';
 import { post } from '../api.js';
-import { showAlert, showMessageUpload } from '../utils.mjs';
-import { clearLastFilter } from './editor/filterControl.js';
-import { resetImgScale } from './editor/scaleControl.js';
+import { showAlert, showMessageUpload } from '../utils.js';
+import { clearLastFilter } from './editor/filter-control.js';
+import { resetImgScale } from './editor/scale-control.js';
 import './form-editor.js';
 import './form-validate.js';
 

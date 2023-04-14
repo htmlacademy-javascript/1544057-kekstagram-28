@@ -1,6 +1,6 @@
-import { CHROME_FILTER, SEPIA_FILTER, MARVIN_FILTER, PHOBOS_FILTER, HEAT_FILTER } from '../constants.mjs';
-import { clearLastFilter, applyFilter } from './editor/filterControl.js';
-import './editor/scaleControl.js';
+import { CHROME_FILTER, SEPIA_FILTER, MARVIN_FILTER, PHOBOS_FILTER, HEAT_FILTER } from '../constants.js';
+import { clearLastFilter, applyFilter } from './editor/filter-control.js';
+import './editor/scale-control.js';
 
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const effectLevelSliderWrapper = imageUploadOverlay.querySelector('.img-upload__effect-level');

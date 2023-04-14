@@ -1,4 +1,4 @@
-import { MESSAGE_UPLOAD_SHOW_TIME } from './constants.mjs';
+import { MESSAGE_UPLOAD_SHOW_TIME } from './constants.js';
 
 const onEscKeyDown = (evt) => {
   if (evt.key === 'Escape') {

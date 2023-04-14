@@ -1,4 +1,4 @@
-import { API_URL } from './constants.mjs';
+import { API_URL } from './constants.js';
 
 export const get = async (handleError) => {
   try {
