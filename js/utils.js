@@ -10,13 +10,16 @@ const onEscKeyDown = (event, callback) => {
 function showAlert() {
   const template = document.getElementById('error');
   const error = template.content.cloneNode(true);
+  const button = error.querySelector('.error__button');
 
   const handleButtonClick = () => {
     removeError();
   };
 
   const handleKeyPress = (event) => {
+    event.stopPropagation();
     onEscKeyDown(event, removeError);
+
   };
 
   const handleClickOutside = (event) => {
@@ -24,16 +27,16 @@ function showAlert() {
       removeError();
     }
   };
+
   function removeError() {
     document.querySelector('.error').remove();
-    document.removeEventListener('keydown', handleKeyPress);
+    document.removeEventListener('keydown', handleKeyPress, true);
     document.removeEventListener('click', handleClickOutside);
   }
 
-  const button = error.querySelector('.error__button');
   button.addEventListener('click', handleButtonClick);
 
-  document.addEventListener('keydown', handleKeyPress);
+  document.addEventListener('keydown', handleKeyPress, true);
   document.addEventListener('click', handleClickOutside);
 
   document.body.appendChild(error);

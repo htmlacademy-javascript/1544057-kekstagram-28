@@ -64,14 +64,14 @@ uploadForm.addEventListener('input', () => {
 
 hastagForm.addEventListener('keydown', (event) => {
   onEscKeyDown(event, () => {
-    event.stopPropagation();
     document.activeElement.blur();
+    event.stopPropagation();
   });
 });
 
 commentForm.addEventListener('keydown', (event) => {
   onEscKeyDown(event, () => {
-    event.stopPropagation();
     document.activeElement.blur();
+    event.stopPropagation();
   });
 });

@@ -17,17 +17,16 @@ const submitButton = uploadForm.querySelector('.img-upload__submit');
 const hastagForm = uploadForm.querySelector('.text__hashtags');
 const descriptionFrom = uploadForm.querySelector('.text__description');
 
-
-const onDocumentKeydown = (event) => {
-  onEscKeyDown(event, closeUserModal);
-};
-
 const clearInputs = () => {
   clearLastFilter(true);
   resetImgScale();
   uploadFile.value = '';
   hastagForm.value = '';
   descriptionFrom.value = '';
+};
+
+const onDocumentKeydown = (event) => {
+  onEscKeyDown(event, closeUserModal);
 };
 
 const openUserModal = () => {
@@ -53,6 +52,7 @@ const displayImage = (image) => {
 
 cancelUpload.addEventListener('click', () => {
   closeUserModal();
+  clearInputs();
 });
 
 uploadFile.addEventListener('change', () => {
@@ -73,8 +73,8 @@ uploadForm.addEventListener('submit', (event) => {
       clearInputs();
     })
     .catch(
-      (err) => {
-        showAlert(err.message);
+      () => {
+        showAlert();
       }
     )
     .finally(submitButton.removeAttribute('disabled'));
