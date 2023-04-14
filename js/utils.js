@@ -8,7 +8,7 @@ const onEscKeyDown = (event, callback) => {
 };
 
 function showAlert() {
-  const template = document.getElementById('error');
+  const template = document.querySelector('#error');
   const error = template.content.cloneNode(true);
   const button = error.querySelector('.error__button');
 
