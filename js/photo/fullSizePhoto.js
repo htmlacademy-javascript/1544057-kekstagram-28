@@ -1,5 +1,5 @@
-import { COMMENTS_SHOW_COUNT, IMG_WIDTH, IMG_HEIGHT } from '../constants.mjs';
-import { onEscKeyDown } from '../utils.mjs';
+import { COMMENTS_SHOW_COUNT } from '../constants.js';
+import { onEscKeyDown } from '../utils.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgElement = bigPicture.querySelector('.big-picture__img img');
@@ -20,22 +20,19 @@ const onCloseButtonClick = () => {
 };
 
 const renderComment = (comment) => {
-  const commentElement = document.createElement('li');
+  const commentTemplate = document.querySelector('#comment-template');
+  const commentElement = commentTemplate.content.cloneNode(true);
 
-  commentElement.classList.add('social__comment');
-  commentElement.innerHTML = `
-    <img
-      class="social__picture"
-      src="${comment.avatar}"
-      alt="${comment.name}"
-      width="${IMG_WIDTH}"
-      height="${IMG_HEIGHT}"
-    />
-    <p class="social__text">${comment.message}</p>
-  `;
+  const avatarElement = commentElement.querySelector('.social__picture');
+  avatarElement.src = comment.avatar;
+  avatarElement.alt = comment.name;
+
+  const textElement = commentElement.querySelector('.social__text');
+  textElement.textContent = comment.message;
 
   socialCommentsElement.appendChild(commentElement);
 };
+
 
 const renderComments = (comments) => {
   const commentsToShow = comments.splice(0, COMMENTS_SHOW_COUNT);
@@ -50,7 +47,7 @@ const renderComments = (comments) => {
     renderComment(comment);
   });
 
-  socialСommentsCountElement.innerHTML = `${socialCommentsElement.children.length} из ${commentsCountElement.textContent} комментариев`;
+  socialСommentsCountElement.textContent = `${socialCommentsElement.children.length} из ${commentsCountElement.textContent} комментариев`;
 };
 
 const renderBigPicture = (photoData) => {
@@ -61,7 +58,8 @@ const renderBigPicture = (photoData) => {
   const comments = photoData.comments;
 
   commentsCountElement.textContent = comments.length;
-  socialCommentsElement.innerHTML = '';
+
+  socialCommentsElement.textContent = '';
 
   renderComments(comments);
 
