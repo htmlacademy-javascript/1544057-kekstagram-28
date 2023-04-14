@@ -19,23 +19,25 @@ const onCloseButtonClick = () => {
   closeBigPicture();
 };
 
-const renderComment = (comment) => {
+const createComment = (comment) => {
   const commentTemplate = document.querySelector('#comment-template');
   const commentElement = commentTemplate.content.cloneNode(true);
 
   const avatarElement = commentElement.querySelector('.social__picture');
+
   avatarElement.src = comment.avatar;
   avatarElement.alt = comment.name;
 
   const textElement = commentElement.querySelector('.social__text');
   textElement.textContent = comment.message;
 
-  socialCommentsElement.appendChild(commentElement);
+  return commentElement;
 };
 
 
 const renderComments = (comments) => {
   const commentsToShow = comments.splice(0, COMMENTS_SHOW_COUNT);
+  const fragment = document.createDocumentFragment();
 
   commentsLoaderElement.classList.remove('hidden');
 
@@ -44,8 +46,10 @@ const renderComments = (comments) => {
   }
 
   commentsToShow.forEach((comment) => {
-    renderComment(comment);
+    fragment.appendChild(createComment(comment));
   });
+
+  socialCommentsElement.appendChild(fragment);
 
   socialСommentsCountElement.textContent = `${socialCommentsElement.children.length} из ${commentsCountElement.textContent} комментариев`;
 };
