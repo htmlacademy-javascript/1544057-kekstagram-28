@@ -15,7 +15,7 @@ export const get = async (handleError) => {
 
 export const post = async (data, handleError) => {
   try {
-    const response = await fetch(API_URL + false, {
+    const response = await fetch(API_URL, {
       method: 'POST',
       body: data,
     });

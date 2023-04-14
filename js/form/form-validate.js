@@ -62,16 +62,16 @@ uploadForm.addEventListener('input', () => {
   }
 });
 
-hastagForm.addEventListener('keydown', (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.stopPropagation();
+hastagForm.addEventListener('keydown', (event) => {
+  onEscKeyDown(event, () => {
+    event.stopPropagation();
     document.activeElement.blur();
-  }
+  });
 });
 
-commentForm.addEventListener('keydown', (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.stopPropagation();
+commentForm.addEventListener('keydown', (event) => {
+  onEscKeyDown(event, () => {
+    event.stopPropagation();
     document.activeElement.blur();
-  }
+  });
 });

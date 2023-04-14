@@ -30,8 +30,8 @@ const createSlider = (currentFilter) => {
 };
 
 effectButtons.forEach((effectButton) => {
-  effectButton.addEventListener('click', (evt) => {
-    const currentFilter = evt.target.id.split('-')[1];
+  effectButton.addEventListener('click', (event) => {
+    const currentFilter = event.target.id.split('-')[1];
 
     clearLastFilter();
 

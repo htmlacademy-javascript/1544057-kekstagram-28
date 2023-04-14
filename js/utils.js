@@ -1,10 +1,10 @@
 import { MESSAGE_UPLOAD_SHOW_TIME } from './constants.js';
 
-const onEscKeyDown = (evt) => {
-  if (evt.key === 'Escape') {
-    return true;
+const onEscKeyDown = (event, callback) => {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    callback();
   }
-  return false;
 };
 
 function showAlert() {
@@ -16,9 +16,7 @@ function showAlert() {
   };
 
   const handleKeyPress = (event) => {
-    if (onEscKeyDown(event)) {
-      removeError();
-    }
+    onEscKeyDown(event, removeError);
   };
 
   const handleClickOutside = (event) => {
@@ -39,7 +37,6 @@ function showAlert() {
   document.addEventListener('click', handleClickOutside);
 
   document.body.appendChild(error);
-
 }
 
 
@@ -47,9 +44,7 @@ const showMessageUpload = () => {
   const messageTemplate = document.querySelector('#success').content.cloneNode(true);
   const messageContainer = messageTemplate.querySelector('.success');
 
-  messageTemplate.querySelector('.success__button').addEventListener('click', () => {
-    messageContainer.remove();
-  });
+  messageTemplate.querySelector('.success__button').addEventListener('click', () => messageContainer.remove());
 
   document.body.appendChild(messageContainer);
 

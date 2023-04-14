@@ -1,5 +1,5 @@
-import { renderUserPhotos } from './photo/userPhotosRenderer.js';
-import { addPictureHandlers } from './photo/fullSizePhoto.js';
+import { renderUserPhotos } from './photo/user-photos-renderer.js';
+import { addPictureHandlers } from './photo/full-size-photo.js';
 import { get } from './api.js';
 import './form/form.js';
 

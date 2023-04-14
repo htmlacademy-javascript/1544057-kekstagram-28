@@ -18,11 +18,8 @@ const hastagForm = uploadForm.querySelector('.text__hashtags');
 const descriptionFrom = uploadForm.querySelector('.text__description');
 
 
-const onDocumentKeydown = (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.preventDefault();
-    closeUserModal();
-  }
+const onDocumentKeydown = (event) => {
+  onEscKeyDown(event, closeUserModal);
 };
 
 const clearInputs = () => {
@@ -42,7 +39,7 @@ const openUserModal = () => {
 function closeUserModal() {
   imgUploadOverlay.classList.add('hidden');
   pageBody.classList.remove('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
   clearInputs();
 }
 
@@ -64,12 +61,12 @@ uploadFile.addEventListener('change', () => {
   displayImage(file);
 });
 
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+uploadForm.addEventListener('submit', (event) => {
+  event.preventDefault();
 
   submitButton.setAttribute('disabled', '');
 
-  post(new FormData(evt.target))
+  post(new FormData(event.target))
     .then(() => {
       closeUserModal();
       showMessageUpload();
