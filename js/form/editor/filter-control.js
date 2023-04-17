@@ -5,13 +5,10 @@ const slider = form.querySelector('.effect-level__slider');
 
 let lastFilterClass = '';
 
-const clearLastFilter = (destroy) => {
+const clearLastFilter = () => {
   if (lastFilterClass) {
     imgPreview.classList.remove(lastFilterClass);
-    imgPreview.style.filter = '';
-    if (destroy) {
-      slider.noUiSlider.destroy();
-    }
+    imgPreview.style.filter = 'none';
   }
 };
 

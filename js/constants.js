@@ -14,7 +14,21 @@ const MESSAGE_UPLOAD_SHOW_TIME = 10000;
 const RANDOM_PICS_COUNT = 10;
 const RERENDER_DELAY = 500;
 
-export { COMMENTS_SHOW_COUNT, HASHTAG_REGEX, MAX_HASHTAG_COUNT, IMG_SCALE_CHANGE_STEP, IMG_MIN_SCALE, IMG_MAX_SCALE, API_URL, MESSAGE_UPLOAD_SHOW_TIME, RANDOM_PICS_COUNT, RERENDER_DELAY };
+const FILE_FORMATS = ['jpg', 'jpeg', 'png'];
+
+export { COMMENTS_SHOW_COUNT, HASHTAG_REGEX, MAX_HASHTAG_COUNT, IMG_SCALE_CHANGE_STEP, IMG_MIN_SCALE, IMG_MAX_SCALE, API_URL, MESSAGE_UPLOAD_SHOW_TIME, RANDOM_PICS_COUNT, RERENDER_DELAY, FILE_FORMATS };
+
+const format = {
+  to: function (value) {
+    if (Number.isInteger(value)) {
+      return Number(value.toFixed(0));
+    }
+    return Number(value.toFixed(1));
+  },
+  from: function (value) {
+    return parseFloat(value);
+  }
+};
 
 export const CHROME_FILTER = {
   start: 1,
@@ -23,7 +37,8 @@ export const CHROME_FILTER = {
   range: {
     min: 0,
     max: 1,
-  }
+  },
+  format
 };
 
 export const SEPIA_FILTER = {
@@ -33,7 +48,8 @@ export const SEPIA_FILTER = {
   range: {
     min: 0,
     max: 1,
-  }
+  },
+  format
 };
 
 export const MARVIN_FILTER = {
@@ -43,7 +59,8 @@ export const MARVIN_FILTER = {
   range: {
     min: 0,
     max: 100,
-  }
+  },
+  format
 };
 
 export const PHOBOS_FILTER = {
@@ -53,7 +70,8 @@ export const PHOBOS_FILTER = {
   range: {
     min: 0,
     max: 3,
-  }
+  },
+  format
 };
 
 export const HEAT_FILTER = {
@@ -63,6 +81,7 @@ export const HEAT_FILTER = {
   range: {
     min: 1,
     max: 3,
-  }
+  },
+  format
 };
 

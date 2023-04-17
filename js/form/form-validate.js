@@ -2,8 +2,8 @@ import { onEscKeyDown } from '../utils.js';
 import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
-const hastagForm = uploadForm.querySelector('.text__hashtags');
-const commentForm = uploadForm.querySelector('.text__description');
+const inputTextForm = uploadForm.querySelector('.img-upload__text');
+const hastagForm = inputTextForm.querySelector('.text__hashtags');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const hashtagPristine = new Pristine(uploadForm, {
@@ -62,14 +62,7 @@ uploadForm.addEventListener('input', () => {
   }
 });
 
-hastagForm.addEventListener('keydown', (event) => {
-  onEscKeyDown(event, () => {
-    document.activeElement.blur();
-    event.stopPropagation();
-  });
-});
-
-commentForm.addEventListener('keydown', (event) => {
+inputTextForm.addEventListener('keydown', (event) => {
   onEscKeyDown(event, () => {
     document.activeElement.blur();
     event.stopPropagation();

@@ -80,7 +80,6 @@ const switchPhotosByFilter = (userPhotos, evt) => {
 
 get()
   .then((userPhotos) => {
-    // console.log('userPhtotos :>> ', userPhotos);
     renderUserPhotos(userPhotos);
     addPictureHandlers(userPhotos);
     filterPicture.classList.remove('img-filters--inactive');
@@ -89,7 +88,9 @@ get()
   })
   .catch(
     () => {
-      showAlert('Ошибка получения фотографий');
+      showAlert('Ошибка получения фотографий', () => {
+        location.reload();
+      });
     });
 
 

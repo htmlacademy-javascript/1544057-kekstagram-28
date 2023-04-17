@@ -7,7 +7,7 @@ const onEscKeyDown = (event, callback) => {
   }
 };
 
-function showAlert(msg) {
+function showAlert(msg, callback) {
   const template = document.querySelector('#error');
   const error = template.content.cloneNode(true);
   const button = error.querySelector('.error__button');
@@ -16,6 +16,9 @@ function showAlert(msg) {
 
   const handleButtonClick = () => {
     removeError();
+    if (callback) {
+      callback();
+    }
   };
 
   const handleKeyPress = (event) => {
