@@ -3,12 +3,14 @@ import { post } from '../api.js';
 import { showAlert, showMessageUpload } from '../utils.js';
 import { clearLastFilter } from './editor/filter-control.js';
 import { resetImgScale } from './editor/scale-control.js';
+import { FILE_FORMATS } from '../constants.js';
 import './form-editor.js';
 import './form-validate.js';
 
 const pageBody = document.querySelector('body');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadForm = document.querySelector('.img-upload__form');
+const uploadFileFrom = document.querySelector('#upload-select-image');
 const uploadFile = document.querySelector('#upload-file');
 const imgPreview = document.querySelector('.img-upload__preview');
 const imgEffestsPreview = document.querySelectorAll('.effects__preview');
@@ -20,7 +22,7 @@ const descriptionFrom = uploadForm.querySelector('.text__description');
 const clearInputs = () => {
   clearLastFilter(true);
   resetImgScale();
-  uploadFile.value = '';
+  uploadFileFrom.reset();
   hastagForm.value = '';
   descriptionFrom.value = '';
 };
@@ -56,9 +58,13 @@ cancelUpload.addEventListener('click', () => {
 });
 
 uploadFile.addEventListener('change', () => {
-  openUserModal();
   const file = uploadFile.files[0];
-  displayImage(file);
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_FORMATS.some((it) => fileName.endsWith(it));
+  if (matches) {
+    displayImage(file);
+    openUserModal();
+  }
 });
 
 uploadForm.addEventListener('submit', (event) => {
@@ -73,8 +79,10 @@ uploadForm.addEventListener('submit', (event) => {
       clearInputs();
     })
     .catch(
-      () => {
-        showAlert('Ошибка загрузки файла');
+      (err) => {
+        if (err) {
+          showAlert(err.message);
+        }
       }
     )
     .finally(submitButton.removeAttribute('disabled'));

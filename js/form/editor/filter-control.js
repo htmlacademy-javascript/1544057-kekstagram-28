@@ -8,7 +8,7 @@ let lastFilterClass = '';
 const clearLastFilter = (destroy) => {
   if (lastFilterClass) {
     imgPreview.classList.remove(lastFilterClass);
-    imgPreview.style.filter = '';
+    imgPreview.style.filter = 'none';
     if (destroy) {
       slider.noUiSlider.destroy();
     }
