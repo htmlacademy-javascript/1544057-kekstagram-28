@@ -82,7 +82,7 @@ const renderBigPicture = (photoData) => {
   }
 };
 
-const addPictureHandlers = (userPhotos) => {
+const onUserPictureClick = (userPhotos) => {
   const pictures = document.querySelectorAll('.picture');
 
   for (const picture of pictures) {
@@ -97,4 +97,4 @@ const addPictureHandlers = (userPhotos) => {
   }
 };
 
-export { addPictureHandlers };
+export { onUserPictureClick };

@@ -14,20 +14,20 @@ function showAlert(msg, callback) {
   const errorMessage = error.querySelector('.error__title');
   errorMessage.textContent = msg;
 
-  const handleButtonClick = () => {
+  const onCloseButtonClick = () => {
     removeError();
     if (callback) {
       callback();
     }
   };
 
-  const handleKeyPress = (event) => {
+  const onEscKeyAlertDown = (event) => {
     event.stopPropagation();
     onEscKeyDown(event, removeError);
 
   };
 
-  const handleClickOutside = (event) => {
+  const onOutsideClick = (event) => {
     if (!error.contains(event.target)) {
       removeError();
     }
@@ -35,14 +35,14 @@ function showAlert(msg, callback) {
 
   function removeError() {
     document.querySelector('.error').remove();
-    document.removeEventListener('keydown', handleKeyPress, true);
-    document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('keydown', onEscKeyAlertDown, true);
+    document.removeEventListener('click', onOutsideClick);
   }
 
-  button.addEventListener('click', handleButtonClick);
+  button.addEventListener('click', onCloseButtonClick);
 
-  document.addEventListener('keydown', handleKeyPress, true);
-  document.addEventListener('click', handleClickOutside);
+  document.addEventListener('keydown', onEscKeyAlertDown, true);
+  document.addEventListener('click', onOutsideClick);
 
   document.body.appendChild(error);
 }
