@@ -1,5 +1,5 @@
-import { onEscKeyDown } from '../utils.mjs';
-import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.mjs';
+import { onEscKeyDown } from '../utils.js';
+import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hastagForm = uploadForm.querySelector('.text__hashtags');
@@ -62,16 +62,16 @@ uploadForm.addEventListener('input', () => {
   }
 });
 
-hastagForm.addEventListener('keydown', (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.stopPropagation();
+hastagForm.addEventListener('keydown', (event) => {
+  onEscKeyDown(event, () => {
     document.activeElement.blur();
-  }
+    event.stopPropagation();
+  });
 });
 
-commentForm.addEventListener('keydown', (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.stopPropagation();
+commentForm.addEventListener('keydown', (event) => {
+  onEscKeyDown(event, () => {
     document.activeElement.blur();
-  }
+    event.stopPropagation();
+  });
 });

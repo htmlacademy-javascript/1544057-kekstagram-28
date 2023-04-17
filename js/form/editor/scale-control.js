@@ -1,4 +1,4 @@
-import { IMG_SCALE_CHANGE_STEP, IMG_MIN_SCALE, IMG_MAX_SCALE } from '../../constants.mjs';
+import { IMG_SCALE_CHANGE_STEP, IMG_MIN_SCALE, IMG_MAX_SCALE } from '../../constants.js';
 
 const formWrapper = document.querySelector('.img-upload__overlay');
 const decreaseBtn = formWrapper.querySelector('.scale__control--smaller');

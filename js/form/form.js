@@ -1,8 +1,8 @@
-import { onEscKeyDown } from '../utils.mjs';
+import { onEscKeyDown } from '../utils.js';
 import { post } from '../api.js';
-import { showAlert, showMessageUpload } from '../utils.mjs';
-import { clearLastFilter } from './editor/filterControl.js';
-import { resetImgScale } from './editor/scaleControl.js';
+import { showAlert, showMessageUpload } from '../utils.js';
+import { clearLastFilter } from './editor/filter-control.js';
+import { resetImgScale } from './editor/scale-control.js';
 import './form-editor.js';
 import './form-validate.js';
 
@@ -17,20 +17,16 @@ const submitButton = uploadForm.querySelector('.img-upload__submit');
 const hastagForm = uploadForm.querySelector('.text__hashtags');
 const descriptionFrom = uploadForm.querySelector('.text__description');
 
-
-const onDocumentKeydown = (evt) => {
-  if (onEscKeyDown(evt)) {
-    evt.preventDefault();
-    closeUserModal();
-  }
-};
-
 const clearInputs = () => {
   clearLastFilter(true);
   resetImgScale();
   uploadFile.value = '';
   hastagForm.value = '';
   descriptionFrom.value = '';
+};
+
+const onDocumentKeydown = (event) => {
+  onEscKeyDown(event, closeUserModal);
 };
 
 const openUserModal = () => {
@@ -42,7 +38,7 @@ const openUserModal = () => {
 function closeUserModal() {
   imgUploadOverlay.classList.add('hidden');
   pageBody.classList.remove('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
   clearInputs();
 }
 
@@ -56,6 +52,7 @@ const displayImage = (image) => {
 
 cancelUpload.addEventListener('click', () => {
   closeUserModal();
+  clearInputs();
 });
 
 uploadFile.addEventListener('change', () => {
@@ -64,20 +61,20 @@ uploadFile.addEventListener('change', () => {
   displayImage(file);
 });
 
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+uploadForm.addEventListener('submit', (event) => {
+  event.preventDefault();
 
   submitButton.setAttribute('disabled', '');
 
-  post(new FormData(evt.target))
+  post(new FormData(event.target))
     .then(() => {
       closeUserModal();
       showMessageUpload();
       clearInputs();
     })
     .catch(
-      (err) => {
-        showAlert(err.message);
+      () => {
+        showAlert('Ошибка загрузки файла');
       }
     )
     .finally(submitButton.removeAttribute('disabled'));
