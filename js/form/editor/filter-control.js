@@ -12,33 +12,42 @@ const clearLastFilter = () => {
   }
 };
 
+const CLASS_TEMPLATE = 'effects__imgPreview--';
+
+const FILTERS = {
+  chrome: {
+    className: `${CLASS_TEMPLATE}chrome`,
+    style: (value) => ` grayscale(${value})`
+  },
+  sepia: {
+    className: `${CLASS_TEMPLATE}sepia`,
+    style: (value) => ` sepia(${value})`
+  },
+  marvin: {
+    className: `${CLASS_TEMPLATE}marvin`,
+    style: (value) => ` invert(${value}%)`
+  },
+  phobos: {
+    className: `${CLASS_TEMPLATE}phobos`,
+    style: (value) => ` blur(${value}px)`
+  },
+  heat: {
+    className: `${CLASS_TEMPLATE}heat`,
+    style: (value) => ` brightness(${value})`
+  }
+};
+
 const applyFilter = (filterName) => {
-  const filterClass = `effects__imgPreview--${filterName}`;
+  const filter = FILTERS[filterName];
+  const filterClass = filter.className;
+  const filterStyle = filter.style;
   imgPreview.classList.add(filterClass);
   lastFilterClass = filterClass;
 
   slider.noUiSlider.on('update', () => {
     const value = slider.noUiSlider.get();
     intensityInput.value = value;
-
-    switch (filterName) {
-      case 'chrome':
-        imgPreview.style.filter = `grayscale(${value})`;
-        break;
-      case 'sepia':
-        imgPreview.style.filter = `sepia(${value})`;
-        break;
-      case 'marvin':
-        imgPreview.style.filter = `invert(${value}%)`;
-        break;
-      case 'phobos':
-        imgPreview.style.filter = `blur(${value}px)`;
-        break;
-      case 'heat':
-        imgPreview.style.filter = `brightness(${value})`;
-        break;
-    }
-
+    imgPreview.style.filter = filterStyle(value);
   });
 };
 

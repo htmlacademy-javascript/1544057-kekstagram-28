@@ -1,7 +1,7 @@
 import { get } from '../api.js';
 import { debounce, shuffleArr, showAlert } from '../utils.js';
 import { RANDOM_PICS_COUNT, RERENDER_DELAY } from '../constants.js';
-import { addPictureHandlers } from './full-size-photo.js';
+import { onUserPictureClick } from './full-size-photo.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const filterPicture = document.querySelector('.img-filters');
@@ -81,7 +81,7 @@ const switchPhotosByFilter = (userPhotos, evt) => {
 get()
   .then((userPhotos) => {
     renderUserPhotos(userPhotos);
-    addPictureHandlers(userPhotos);
+    onUserPictureClick(userPhotos);
     filterPicture.classList.remove('img-filters--inactive');
     filterPicture.addEventListener('click', debounce((evt) => switchPhotosByFilter(userPhotos, evt), RERENDER_DELAY,));
     filterPicture.addEventListener('click', (evt) => makeButtonActive(evt));
