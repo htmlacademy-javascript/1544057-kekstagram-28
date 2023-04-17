@@ -4,6 +4,7 @@ import { showAlert, showMessageUpload } from '../utils.js';
 import { clearLastFilter } from './editor/filter-control.js';
 import { resetImgScale } from './editor/scale-control.js';
 import { FILE_FORMATS } from '../constants.js';
+import { destroySlider } from './form-editor.js';
 import './form-editor.js';
 import './form-validate.js';
 
@@ -19,10 +20,12 @@ const submitButton = uploadForm.querySelector('.img-upload__submit');
 const hastagForm = uploadForm.querySelector('.text__hashtags');
 const descriptionFrom = uploadForm.querySelector('.text__description');
 
+
 const clearInputs = () => {
-  clearLastFilter(true);
+  clearLastFilter();
   resetImgScale();
   uploadFileFrom.reset();
+  destroySlider();
   hastagForm.value = '';
   descriptionFrom.value = '';
 };

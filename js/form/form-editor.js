@@ -19,9 +19,13 @@ effectLevelSliderWrapper.classList.add('hidden');
 
 let slider = null;
 
+export const destroySlider = () => {
+  slider.destroy();
+  effectLevelSliderWrapper.classList.add('hidden');
+};
+
 const createSlider = (currentFilter) => {
   effectLevelSliderWrapper.classList.remove('hidden');
-
   if (slider) {
     slider.destroy();
   }
@@ -29,15 +33,14 @@ const createSlider = (currentFilter) => {
   slider = noUiSlider.create(effectLevelSlider, sliderConfig[currentFilter]);
 };
 
+
 effectButtons.forEach((effectButton) => {
   effectButton.addEventListener('click', (event) => {
     const currentFilter = event.target.id.split('-')[1];
-
     clearLastFilter();
 
     if (currentFilter === 'none') {
-      slider.destroy();
-      effectLevelSliderWrapper.classList.add('hidden');
+      destroySlider();
       return;
     }
 
