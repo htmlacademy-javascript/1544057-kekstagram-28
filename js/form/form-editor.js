@@ -20,7 +20,9 @@ effectLevelSliderWrapper.classList.add('hidden');
 let slider = null;
 
 export const destroySlider = () => {
-  slider.destroy();
+  if (slider) {
+    slider.destroy();
+  }
   effectLevelSliderWrapper.classList.add('hidden');
 };
 
