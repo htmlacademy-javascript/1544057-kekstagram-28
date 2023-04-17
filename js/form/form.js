@@ -74,7 +74,7 @@ uploadForm.addEventListener('submit', (event) => {
     })
     .catch(
       () => {
-        showAlert();
+        showAlert('Ошибка загрузки файла');
       }
     )
     .finally(submitButton.removeAttribute('disabled'));
