@@ -34,6 +34,7 @@ const renderUserPhotos = (picturesData) => {
   });
 
   picturesContainer.appendChild(fragment);
+  onUserPictureClick(picturesData);
 };
 
 
@@ -81,7 +82,6 @@ const switchPhotosByFilter = (userPhotos, evt) => {
 get()
   .then((userPhotos) => {
     renderUserPhotos(userPhotos);
-    onUserPictureClick(userPhotos);
     filterPicture.classList.remove('img-filters--inactive');
     filterPicture.addEventListener('click', debounce((evt) => switchPhotosByFilter(userPhotos, evt), RERENDER_DELAY,));
     filterPicture.addEventListener('click', (evt) => makeButtonActive(evt));
