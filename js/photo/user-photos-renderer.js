@@ -3,24 +3,24 @@ import { debounce, shuffleArr, showModal } from '../utils.js';
 import { RANDOM_PICS_COUNT, RERENDER_DELAY } from '../constants.js';
 import { onUserPictureClick } from './full-size-photo.js';
 
-const picturesContainer = document.querySelector('.pictures');
-const filterPicture = document.querySelector('.img-filters');
-const filterButtons = document.querySelectorAll('.img-filters__button');
+const picturesContainerElement = document.querySelector('.pictures');
+const filterPictureElement = document.querySelector('.img-filters');
+const filterButtonElements = document.querySelectorAll('.img-filters__button');
 
 const createPictureElement = (pictureData) => {
-  const pictureTemplate = document.querySelector('#picture');
-  const pictureElement = pictureTemplate.content.cloneNode(true);
+  const pictureTemplateElement = document.querySelector('#picture');
+  const pictureElement = pictureTemplateElement.content.cloneNode(true);
 
-  const pictureLink = pictureElement.querySelector('.picture');
-  const pictureImg = pictureElement.querySelector('.picture__img');
-  const pictureLikes = pictureElement.querySelector('.picture__likes');
-  const pictureComments = pictureElement.querySelector('.picture__comments');
+  const pictureLinkElement = pictureElement.querySelector('.picture');
+  const pictureImgElement = pictureElement.querySelector('.picture__img');
+  const pictureLikesElement = pictureElement.querySelector('.picture__likes');
+  const pictureCommentsElement = pictureElement.querySelector('.picture__comments');
 
-  pictureLink.href = pictureData.url;
-  pictureImg.src = pictureData.url;
-  pictureImg.alt = pictureData.id;
-  pictureLikes.textContent = pictureData.likes;
-  pictureComments.textContent = pictureData.comments.length;
+  pictureLinkElement.href = pictureData.url;
+  pictureImgElement.src = pictureData.url;
+  pictureImgElement.alt = pictureData.id;
+  pictureLikesElement.textContent = pictureData.likes;
+  pictureCommentsElement.textContent = pictureData.comments.length;
 
   return pictureElement;
 };
@@ -33,13 +33,13 @@ const renderUserPhotos = (picturesData) => {
     fragment.appendChild(pictureElement);
   });
 
-  picturesContainer.appendChild(fragment);
+  picturesContainerElement.appendChild(fragment);
   onUserPictureClick(picturesData);
 };
 
 
 const makeButtonActive = (evt) => {
-  filterButtons.forEach((filter) => {
+  filterButtonElements.forEach((filter) => {
     if (evt.target.classList.contains('img-filters__button')) {
       filter.classList.remove('img-filters__button--active');
     }
@@ -51,7 +51,9 @@ const makeButtonActive = (evt) => {
 
 const switchPhotosByFilter = (userPhotos, evt) => {
   if (evt.target.classList.contains('img-filters__button')) {
-    document.querySelectorAll('.picture').forEach((picture) => {
+    const pictureElements = document.querySelectorAll('.picture');
+
+    pictureElements.forEach((picture) => {
       picture.remove();
     });
   }
@@ -82,9 +84,9 @@ const switchPhotosByFilter = (userPhotos, evt) => {
 get()
   .then((userPhotos) => {
     renderUserPhotos(userPhotos);
-    filterPicture.classList.remove('img-filters--inactive');
-    filterPicture.addEventListener('click', debounce((evt) => switchPhotosByFilter(userPhotos, evt), RERENDER_DELAY,));
-    filterPicture.addEventListener('click', (evt) => makeButtonActive(evt));
+    filterPictureElement.classList.remove('img-filters--inactive');
+    filterPictureElement.addEventListener('click', debounce((evt) => switchPhotosByFilter(userPhotos, evt), RERENDER_DELAY,));
+    filterPictureElement.addEventListener('click', (evt) => makeButtonActive(evt));
   })
   .catch(
     () => {

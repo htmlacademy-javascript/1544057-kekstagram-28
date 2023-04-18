@@ -1,16 +1,16 @@
 import { COMMENTS_SHOW_COUNT } from '../constants.js';
 import { onEscKeyDown } from '../utils.js';
 
-const bigPicture = document.querySelector('.big-picture');
-const socialСommentsCountElement = bigPicture.querySelector('.social__comment-count');
+const bigPictureElement = document.querySelector('.big-picture');
+const socialСommentsCountElement = bigPictureElement.querySelector('.social__comment-count');
 const commentsCountElement = socialСommentsCountElement.querySelector('.comments-count');
-const socialCommentsElement = bigPicture.querySelector('.social__comments');
-const commentsLoaderElement = bigPicture.querySelector('.comments-loader');
-const closeButton = bigPicture.querySelector('.big-picture__cancel');
+const socialCommentsElement = bigPictureElement.querySelector('.social__comments');
+const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
+const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
 const createComment = (comment) => {
-  const commentTemplate = document.querySelector('#comment-template');
-  const commentElement = commentTemplate.content.cloneNode(true);
+  const commentTemplateElement = document.querySelector('#comment-template');
+  const commentElement = commentTemplateElement.content.cloneNode(true);
   const textElement = commentElement.querySelector('.social__text');
   const avatarElement = commentElement.querySelector('.social__picture');
 
@@ -43,9 +43,9 @@ const renderComments = (comments) => {
 };
 
 const renderBigPicture = (photoData) => {
-  const bigPictureImgElement = bigPicture.querySelector('.big-picture__img img');
-  const likesCountElement = bigPicture.querySelector('.likes-count');
-  const socialCaptionElement = bigPicture.querySelector('.social__caption');
+  const bigPictureImgElement = bigPictureElement.querySelector('.big-picture__img img');
+  const likesCountElement = bigPictureElement.querySelector('.likes-count');
+  const socialCaptionElement = bigPictureElement.querySelector('.social__caption');
   const comments = photoData.comments;
 
   bigPictureImgElement.src = photoData.url;
@@ -69,27 +69,27 @@ const renderBigPicture = (photoData) => {
   };
 
   function closeBigPicture() {
-    bigPicture.classList.add('hidden');
+    bigPictureElement.classList.add('hidden');
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', onBigPictureEscKeyDown);
     commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
-    closeButton.removeEventListener('click', onCloseButtonClick);
+    closeButtonElement.removeEventListener('click', onCloseButtonClick);
   }
 
   commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
   document.addEventListener('keydown', onBigPictureEscKeyDown);
 
-  closeButton.addEventListener('click', closeBigPicture);
+  closeButtonElement.addEventListener('click', closeBigPicture);
 
-  bigPicture.classList.remove('hidden');
+  bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
 
 const onUserPictureClick = (userPhotos) => {
-  const pictures = document.querySelectorAll('.picture');
+  const pictureElements = document.querySelectorAll('.picture');
 
-  for (const picture of pictures) {
+  for (const picture of pictureElements) {
     picture.addEventListener('click', (event) => {
       event.preventDefault();
 

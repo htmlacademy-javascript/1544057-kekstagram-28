@@ -8,13 +8,13 @@ const onEscKeyDown = (event, callback) => {
 };
 
 const showModal = (messageClass, msg = null, callback = null) => {
-  const messageTemplate = document.querySelector(`#${messageClass}`).content.cloneNode(true);
-  const messageContainer = messageTemplate.querySelector(`.${messageClass}`);
-  const messageInner = messageTemplate.querySelector(`.${messageClass}__inner`);
-  const button = messageTemplate.querySelector(`.${messageClass}__button`);
-  const messageTitle = messageTemplate.querySelector(`.${messageClass}__title`);
+  const messageTemplateElement = document.querySelector(`#${messageClass}`).content.cloneNode(true);
+  const messageContainerElement = messageTemplateElement.querySelector(`.${messageClass}`);
+  const messageInnerElement = messageTemplateElement.querySelector(`.${messageClass}__inner`);
+  const messageButtonElement = messageTemplateElement.querySelector(`.${messageClass}__button`);
+  const messageTitleElement = messageTemplateElement.querySelector(`.${messageClass}__title`);
   if (msg) {
-    messageTitle.textContent = msg;
+    messageTitleElement.textContent = msg;
   }
 
   const onCloseButtonClick = () => {
@@ -30,24 +30,24 @@ const showModal = (messageClass, msg = null, callback = null) => {
   };
 
   const onOutsideClick = (event) => {
-    if (!messageInner.contains(event.target)) {
+    if (!messageInnerElement.contains(event.target)) {
       removeMessageModal();
     }
   };
 
 
   function removeMessageModal() {
-    messageContainer.remove();
+    messageContainerElement.remove();
     document.removeEventListener('keydown', onEscKeyModalDown, true);
     document.removeEventListener('click', onOutsideClick);
   }
 
-  button.addEventListener('click', onCloseButtonClick);
+  messageButtonElement.addEventListener('click', onCloseButtonClick);
 
   document.addEventListener('keydown', onEscKeyModalDown, true);
   document.addEventListener('click', onOutsideClick);
 
-  document.body.appendChild(messageContainer);
+  document.body.appendChild(messageContainerElement);
 
   setTimeout(() => {
     removeMessageModal();

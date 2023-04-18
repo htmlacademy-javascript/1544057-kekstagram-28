@@ -8,26 +8,25 @@ import { destroySlider } from './form-editor.js';
 import './form-editor.js';
 import './form-validate.js';
 
-const pageBody = document.querySelector('body');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const uploadForm = document.querySelector('.img-upload__form');
-const uploadFileFrom = document.querySelector('#upload-select-image');
-const uploadFile = document.querySelector('#upload-file');
-const imgPreview = document.querySelector('.img-upload__preview');
-const imgEffestsPreview = document.querySelectorAll('.effects__preview');
-const cancelUpload = document.querySelector('#upload-cancel');
-const submitButton = uploadForm.querySelector('.img-upload__submit');
-const hastagForm = uploadForm.querySelector('.text__hashtags');
-const descriptionFrom = uploadForm.querySelector('.text__description');
+const pageBodyElement = document.querySelector('body');
+const imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const uploadFileElement = document.querySelector('#upload-file');
+const imgPreviewElement = document.querySelector('.img-upload__preview');
+const imgEffestsPreviewElements = document.querySelectorAll('.effects__preview');
+const cancelUploadElement = document.querySelector('.img-upload__cancel');
+const submitButtonElement = uploadFormElement.querySelector('.img-upload__submit');
+const hastagFormElement = uploadFormElement.querySelector('.text__hashtags');
+const descriptionFromElement = uploadFormElement.querySelector('.text__description');
 
 
 const clearInputs = () => {
   clearLastFilter();
   resetImgScale();
-  uploadFileFrom.reset();
+  uploadFormElement.reset();
   destroySlider();
-  hastagForm.value = '';
-  descriptionFrom.value = '';
+  hastagFormElement.value = '';
+  descriptionFromElement.value = '';
 };
 
 const onDocumentKeydown = (event) => {
@@ -35,33 +34,33 @@ const onDocumentKeydown = (event) => {
 };
 
 const openUserModal = () => {
-  imgUploadOverlay.classList.remove('hidden');
-  pageBody.classList.add('modal-open');
+  imgUploadOverlayElement.classList.remove('hidden');
+  pageBodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 function closeUserModal() {
-  imgUploadOverlay.classList.add('hidden');
-  pageBody.classList.remove('modal-open');
+  imgUploadOverlayElement.classList.add('hidden');
+  pageBodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   clearInputs();
 }
 
 const displayImage = (image) => {
   const img = URL.createObjectURL(image);
-  imgPreview.children[0].src = img;
-  imgEffestsPreview.forEach((child) => {
+  imgPreviewElement.children[0].src = img;
+  imgEffestsPreviewElements.forEach((child) => {
     child.style.backgroundImage = `url(${img})`;
   });
 };
 
-cancelUpload.addEventListener('click', () => {
+cancelUploadElement.addEventListener('click', () => {
   closeUserModal();
   clearInputs();
 });
 
-uploadFile.addEventListener('change', () => {
-  const file = uploadFile.files[0];
+uploadFileElement.addEventListener('change', () => {
+  const file = uploadFileElement.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_FORMATS.some((it) => fileName.endsWith(it));
   if (matches) {
@@ -70,10 +69,10 @@ uploadFile.addEventListener('change', () => {
   }
 });
 
-uploadForm.addEventListener('submit', (event) => {
+uploadFormElement.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  submitButton.setAttribute('disabled', '');
+  submitButtonElement.setAttribute('disabled', '');
 
   post(new FormData(event.target))
     .then(() => {
@@ -88,7 +87,7 @@ uploadForm.addEventListener('submit', (event) => {
         }
       }
     )
-    .finally(submitButton.removeAttribute('disabled'));
+    .finally(submitButtonElement.removeAttribute('disabled'));
 
 });
 
