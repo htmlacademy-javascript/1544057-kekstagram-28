@@ -2,10 +2,10 @@ import { CHROME_FILTER, SEPIA_FILTER, MARVIN_FILTER, PHOBOS_FILTER, HEAT_FILTER 
 import { clearLastFilter, applyFilter } from './editor/filter-control.js';
 import './editor/scale-control.js';
 
-const imageUploadOverlay = document.querySelector('.img-upload__overlay');
-const effectLevelSliderWrapper = imageUploadOverlay.querySelector('.img-upload__effect-level');
-const effectLevelSlider = effectLevelSliderWrapper.querySelector('.effect-level__slider');
-const effectButtons = imageUploadOverlay.querySelectorAll('.effects__list input');
+const imageUploadOverlayElement = document.querySelector('.img-upload__overlay');
+const effectLevelSliderWrapperElement = imageUploadOverlayElement.querySelector('.img-upload__effect-level');
+const effectLevelSliderElement = effectLevelSliderWrapperElement.querySelector('.effect-level__slider');
+const effectButtonsElements = imageUploadOverlayElement.querySelectorAll('.effects__list input');
 
 const sliderConfig = {
   chrome: CHROME_FILTER,
@@ -15,7 +15,7 @@ const sliderConfig = {
   heat: HEAT_FILTER
 };
 
-effectLevelSliderWrapper.classList.add('hidden');
+effectLevelSliderWrapperElement.classList.add('hidden');
 
 let slider = null;
 
@@ -23,20 +23,20 @@ export const destroySlider = () => {
   if (slider) {
     slider.destroy();
   }
-  effectLevelSliderWrapper.classList.add('hidden');
+  effectLevelSliderWrapperElement.classList.add('hidden');
 };
 
 const createSlider = (currentFilter) => {
-  effectLevelSliderWrapper.classList.remove('hidden');
+  effectLevelSliderWrapperElement.classList.remove('hidden');
   if (slider) {
     slider.destroy();
   }
 
-  slider = noUiSlider.create(effectLevelSlider, sliderConfig[currentFilter]);
+  slider = noUiSlider.create(effectLevelSliderElement, sliderConfig[currentFilter]);
 };
 
 
-effectButtons.forEach((effectButton) => {
+effectButtonsElements.forEach((effectButton) => {
   effectButton.addEventListener('click', (event) => {
     const currentFilter = event.target.id.split('-')[1];
     clearLastFilter();

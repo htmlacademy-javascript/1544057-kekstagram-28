@@ -1,12 +1,12 @@
 import { onEscKeyDown } from '../utils.js';
 import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
-const inputTextForm = uploadForm.querySelector('.img-upload__text');
-const hastagForm = inputTextForm.querySelector('.text__hashtags');
-const submitButton = uploadForm.querySelector('.img-upload__submit');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const inputTextFormElement = uploadFormElement.querySelector('.img-upload__text');
+const hastagFormElement = inputTextFormElement.querySelector('.text__hashtags');
+const submitButtonElement = uploadFormElement.querySelector('.img-upload__submit');
 
-const hashtagPristine = new Pristine(uploadForm, {
+const hashtagPristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'form__item--invalid',
   errorTextParent: 'img-upload__field-wrapper',
@@ -37,32 +37,32 @@ const validateSimilarHashtags = (string) => {
 };
 
 hashtagPristine.addValidator(
-  hastagForm,
+  hastagFormElement,
   validateHashtag,
   'Ошибка! Не правильный формат хэштега'
 );
 
 hashtagPristine.addValidator(
-  hastagForm,
+  hastagFormElement,
   validateHashtagCount,
   'Ошибка! Максимальное кол-во хэштегов: 5'
 );
 
 hashtagPristine.addValidator(
-  hastagForm,
+  hastagFormElement,
   validateSimilarHashtags,
   'Ошибка! Вы использовали одинаковые хэштеги'
 );
 
-uploadForm.addEventListener('input', () => {
+uploadFormElement.addEventListener('input', () => {
   if (hashtagPristine.validate()) {
-    submitButton.removeAttribute('disabled');
+    submitButtonElement.removeAttribute('disabled');
   } else {
-    submitButton.setAttribute('disabled', '');
+    submitButtonElement.setAttribute('disabled', '');
   }
 });
 
-inputTextForm.addEventListener('keydown', (event) => {
+inputTextFormElement.addEventListener('keydown', (event) => {
   onEscKeyDown(event, () => {
     document.activeElement.blur();
     event.stopPropagation();
