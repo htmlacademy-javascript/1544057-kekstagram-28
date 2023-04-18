@@ -56,6 +56,26 @@ const renderBigPicture = (photoData) => {
   socialCommentsElement.innerHTML = '';
   renderComments(comments);
 
+  const onCloseButtonClick = () => {
+    closeBigPicture();
+  };
+
+  const onCommentsLoaderClick = () => {
+    renderComments(comments);
+  };
+
+  const onBigPictureEscKeyDown = (event) => {
+    onEscKeyDown(event, closeBigPicture);
+  };
+
+  function closeBigPicture() {
+    bigPicture.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onBigPictureEscKeyDown);
+    commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
+    closeButton.removeEventListener('click', onCloseButtonClick);
+  }
+
   commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
   document.addEventListener('keydown', onBigPictureEscKeyDown);
@@ -64,22 +84,6 @@ const renderBigPicture = (photoData) => {
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-
-  function onCommentsLoaderClick() {
-    renderComments(comments);
-  }
-
-  function onBigPictureEscKeyDown(event) {
-    onEscKeyDown(event, closeBigPicture);
-  }
-
-  function closeBigPicture() {
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-    document.removeEventListener('keydown', onBigPictureEscKeyDown);
-    commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
-    closeButton.removeEventListener('click', closeBigPicture);
-  }
 };
 
 const onUserPictureClick = (userPhotos) => {
