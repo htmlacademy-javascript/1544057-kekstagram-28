@@ -80,7 +80,7 @@ const renderBigPicture = (photoData) => {
 
   document.addEventListener('keydown', onBigPictureEscKeyDown);
 
-  closeButtonElement.addEventListener('click', closeBigPicture);
+  closeButtonElement.addEventListener('click', onCloseButtonClick);
 
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
