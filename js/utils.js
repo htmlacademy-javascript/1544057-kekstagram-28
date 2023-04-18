@@ -7,56 +7,50 @@ const onEscKeyDown = (event, callback) => {
   }
 };
 
-function showAlert(msg, callback) {
-  const template = document.querySelector('#error');
-  const error = template.content.cloneNode(true);
-  const button = error.querySelector('.error__button');
-  const errorMessage = error.querySelector('.error__title');
-  errorMessage.textContent = msg;
+const showModal = (messageClass, msg = null, callback = null) => {
+  const messageTemplate = document.querySelector(`#${messageClass}`).content.cloneNode(true);
+  const messageContainer = messageTemplate.querySelector(`.${messageClass}`);
+  const messageInner = messageTemplate.querySelector(`.${messageClass}__inner`);
+  const button = messageTemplate.querySelector(`.${messageClass}__button`);
+  const messageTitle = messageTemplate.querySelector(`.${messageClass}__title`);
+  if (msg) {
+    messageTitle.textContent = msg;
+  }
 
   const onCloseButtonClick = () => {
-    removeError();
+    removeMessageModal();
     if (callback) {
       callback();
     }
   };
 
-  const onEscKeyAlertDown = (event) => {
+  const onEscKeyModalDown = (event) => {
     event.stopPropagation();
-    onEscKeyDown(event, removeError);
-
+    onEscKeyDown(event, removeMessageModal);
   };
 
   const onOutsideClick = (event) => {
-    if (!error.contains(event.target)) {
-      removeError();
+    if (!messageInner.contains(event.target)) {
+      removeMessageModal();
     }
   };
 
-  function removeError() {
-    document.querySelector('.error').remove();
-    document.removeEventListener('keydown', onEscKeyAlertDown, true);
+
+  function removeMessageModal() {
+    messageContainer.remove();
+    document.removeEventListener('keydown', onEscKeyModalDown, true);
     document.removeEventListener('click', onOutsideClick);
   }
 
   button.addEventListener('click', onCloseButtonClick);
 
-  document.addEventListener('keydown', onEscKeyAlertDown, true);
+  document.addEventListener('keydown', onEscKeyModalDown, true);
   document.addEventListener('click', onOutsideClick);
-
-  document.body.appendChild(error);
-}
-
-const showMessageUpload = () => {
-  const messageTemplate = document.querySelector('#success').content.cloneNode(true);
-  const messageContainer = messageTemplate.querySelector('.success');
-
-  messageTemplate.querySelector('.success__button').addEventListener('click', () => messageContainer.remove());
 
   document.body.appendChild(messageContainer);
 
   setTimeout(() => {
-    messageContainer.remove();
+    removeMessageModal();
   }, MESSAGE_UPLOAD_SHOW_TIME);
 };
 
@@ -71,4 +65,4 @@ function debounce(callback, timeoutDelay) {
 
 const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-export { onEscKeyDown, showAlert, showMessageUpload, debounce, shuffleArr };
+export { onEscKeyDown, showModal, debounce, shuffleArr };

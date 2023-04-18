@@ -1,3 +1,4 @@
+const CLASS_TEMPLATE = 'effects__imgPreview--';
 const form = document.querySelector('.img-upload__overlay');
 const imgPreview = form.querySelector('.img-upload__preview');
 const intensityInput = form.querySelector('.effect-level__value');
@@ -12,9 +13,7 @@ const clearLastFilter = () => {
   }
 };
 
-const CLASS_TEMPLATE = 'effects__imgPreview--';
-
-const FILTERS = {
+const filters = {
   chrome: {
     className: `${CLASS_TEMPLATE}chrome`,
     style: (value) => ` grayscale(${value})`
@@ -38,16 +37,16 @@ const FILTERS = {
 };
 
 const applyFilter = (filterName) => {
-  const filter = FILTERS[filterName];
+  const filter = filters[filterName];
   const filterClass = filter.className;
-  const filterStyle = filter.style;
+  const filterstyle = filter.style;
   imgPreview.classList.add(filterClass);
   lastFilterClass = filterClass;
 
   slider.noUiSlider.on('update', () => {
     const value = slider.noUiSlider.get();
     intensityInput.value = value;
-    imgPreview.style.filter = filterStyle(value);
+    imgPreview.style.filter = filterstyle(value);
   });
 };
 

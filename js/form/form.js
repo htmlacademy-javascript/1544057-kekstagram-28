@@ -1,6 +1,6 @@
 import { onEscKeyDown } from '../utils.js';
 import { post } from '../api.js';
-import { showAlert, showMessageUpload } from '../utils.js';
+import { showModal } from '../utils.js';
 import { clearLastFilter } from './editor/filter-control.js';
 import { resetImgScale } from './editor/scale-control.js';
 import { FILE_FORMATS } from '../constants.js';
@@ -78,13 +78,13 @@ uploadForm.addEventListener('submit', (event) => {
   post(new FormData(event.target))
     .then(() => {
       closeUserModal();
-      showMessageUpload();
+      showModal('success');
       clearInputs();
     })
     .catch(
       (err) => {
         if (err) {
-          showAlert(err.message);
+          showModal('error');
         }
       }
     )

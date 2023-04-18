@@ -1,5 +1,5 @@
 import { get } from '../api.js';
-import { debounce, shuffleArr, showAlert } from '../utils.js';
+import { debounce, shuffleArr, showModal } from '../utils.js';
 import { RANDOM_PICS_COUNT, RERENDER_DELAY } from '../constants.js';
 import { onUserPictureClick } from './full-size-photo.js';
 
@@ -88,7 +88,7 @@ get()
   })
   .catch(
     () => {
-      showAlert('Ошибка получения фотографий', () => {
+      showModal('error', 'Ошибка получения фотографий', () => {
         location.reload();
       });
     });
