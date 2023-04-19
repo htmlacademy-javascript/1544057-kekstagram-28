@@ -8,11 +8,11 @@ const checkEscKeyDown = (event, callback) => {
 };
 
 const showModal = (messageClass, msg = null, callback = null) => {
-  const messageTemplateElement = document.querySelector(`#${messageClass}`).content.cloneNode(true);
-  const messageContainerElement = messageTemplateElement.querySelector(`.${messageClass}`);
-  const messageInnerElement = messageTemplateElement.querySelector(`.${messageClass}__inner`);
-  const messageButtonElement = messageTemplateElement.querySelector(`.${messageClass}__button`);
-  const messageTitleElement = messageTemplateElement.querySelector(`.${messageClass}__title`);
+  const messageFragment = document.querySelector(`#${messageClass}`).content.cloneNode(true);
+  const messageContainerElement = messageFragment.querySelector(`.${messageClass}`);
+  const messageInnerElement = messageFragment.querySelector(`.${messageClass}__inner`);
+  const messageButtonElement = messageFragment.querySelector(`.${messageClass}__button`);
+  const messageTitleElement = messageFragment.querySelector(`.${messageClass}__title`);
   if (msg) {
     messageTitleElement.textContent = msg;
   }

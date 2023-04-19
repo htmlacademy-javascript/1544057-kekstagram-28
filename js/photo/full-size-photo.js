@@ -10,15 +10,15 @@ const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel
 
 const createComment = (comment) => {
   const commentTemplateElement = document.querySelector('#comment-template');
-  const commentElement = commentTemplateElement.content.cloneNode(true);
-  const textElement = commentElement.querySelector('.social__text');
-  const avatarElement = commentElement.querySelector('.social__picture');
+  const commentFragment = commentTemplateElement.content.cloneNode(true);
+  const textElement = commentFragment.querySelector('.social__text');
+  const avatarElement = commentFragment.querySelector('.social__picture');
 
   avatarElement.src = comment.avatar;
   avatarElement.alt = comment.name;
   textElement.textContent = comment.message;
 
-  return commentElement;
+  return commentFragment;
 };
 
 const renderComments = (comments) => {
