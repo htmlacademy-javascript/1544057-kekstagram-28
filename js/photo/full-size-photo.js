@@ -42,7 +42,7 @@ const renderComments = (comments) => {
   socialСommentsCountElement.textContent = `${socialCommentsElement.children.length} из ${commentsCountElement.textContent} комментариев`;
 };
 
-const renderBigPicture = (photoData) => {
+export const renderBigPicture = (photoData) => {
   const bigPictureImgElement = bigPictureElement.querySelector('.big-picture__img img');
   const likesCountElement = bigPictureElement.querySelector('.likes-count');
   const socialCaptionElement = bigPictureElement.querySelector('.social__caption');
@@ -85,20 +85,3 @@ const renderBigPicture = (photoData) => {
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
-
-const onUserPictureClick = (userPhotos) => {
-  const pictureElements = document.querySelectorAll('.picture');
-
-  for (const picture of pictureElements) {
-    picture.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      if (event.target.closest('.picture__img')) {
-        const pictureIndex = userPhotos.findIndex((el) => el.id === +event.target.alt);
-        renderBigPicture(userPhotos[pictureIndex]);
-      }
-    });
-  }
-};
-
-export { onUserPictureClick };

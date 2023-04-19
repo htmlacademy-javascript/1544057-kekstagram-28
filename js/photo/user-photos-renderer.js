@@ -1,7 +1,7 @@
 import { get } from '../api.js';
 import { debounce, shuffleArr, showModal } from '../utils.js';
 import { RANDOM_PICS_COUNT, RERENDER_DELAY } from '../constants.js';
-import { onUserPictureClick } from './full-size-photo.js';
+import { renderBigPicture } from './full-size-photo.js';
 
 const picturesContainerElement = document.querySelector('.pictures');
 const filterPictureElement = document.querySelector('.img-filters');
@@ -30,13 +30,17 @@ const renderUserPhotos = (picturesData) => {
 
   picturesData.forEach((pictureData) => {
     const pictureFragment = createPictureFragment(pictureData);
+
+    pictureFragment.querySelector('.picture').addEventListener('click', (event) => {
+      event.preventDefault();
+      renderBigPicture(pictureData);
+    });
+
     fragment.appendChild(pictureFragment);
   });
 
   picturesContainerElement.appendChild(fragment);
-  onUserPictureClick(picturesData);
 };
-
 
 const makeButtonActive = (evt) => {
   filterButtonElements.forEach((filter) => {
