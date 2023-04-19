@@ -1,5 +1,5 @@
 import { COMMENTS_SHOW_COUNT } from '../constants.js';
-import { onEscKeyDown } from '../utils.js';
+import { checkEscKeyDown } from '../utils.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const socialСommentsCountElement = bigPictureElement.querySelector('.social__comment-count');
@@ -10,15 +10,15 @@ const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel
 
 const createComment = (comment) => {
   const commentTemplateElement = document.querySelector('#comment-template');
-  const commentElement = commentTemplateElement.content.cloneNode(true);
-  const textElement = commentElement.querySelector('.social__text');
-  const avatarElement = commentElement.querySelector('.social__picture');
+  const commentFragment = commentTemplateElement.content.cloneNode(true);
+  const textElement = commentFragment.querySelector('.social__text');
+  const avatarElement = commentFragment.querySelector('.social__picture');
 
   avatarElement.src = comment.avatar;
   avatarElement.alt = comment.name;
   textElement.textContent = comment.message;
 
-  return commentElement;
+  return commentFragment;
 };
 
 const renderComments = (comments) => {
@@ -42,7 +42,7 @@ const renderComments = (comments) => {
   socialСommentsCountElement.textContent = `${socialCommentsElement.children.length} из ${commentsCountElement.textContent} комментариев`;
 };
 
-const renderBigPicture = (photoData) => {
+export const renderBigPicture = (photoData) => {
   const bigPictureImgElement = bigPictureElement.querySelector('.big-picture__img img');
   const likesCountElement = bigPictureElement.querySelector('.likes-count');
   const socialCaptionElement = bigPictureElement.querySelector('.social__caption');
@@ -65,7 +65,7 @@ const renderBigPicture = (photoData) => {
   };
 
   const onBigPictureEscKeyDown = (event) => {
-    onEscKeyDown(event, closeBigPicture);
+    checkEscKeyDown(event, closeBigPicture);
   };
 
   function closeBigPicture() {
@@ -85,20 +85,3 @@ const renderBigPicture = (photoData) => {
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
-
-const onUserPictureClick = (userPhotos) => {
-  const pictureElements = document.querySelectorAll('.picture');
-
-  for (const picture of pictureElements) {
-    picture.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      if (event.target.closest('.picture__img')) {
-        const pictureIndex = userPhotos.findIndex((el) => el.id === +event.target.alt);
-        renderBigPicture(userPhotos[pictureIndex]);
-      }
-    });
-  }
-};
-
-export { onUserPictureClick };

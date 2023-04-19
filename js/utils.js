@@ -1,6 +1,6 @@
 import { MESSAGE_UPLOAD_SHOW_TIME } from './constants.js';
 
-const onEscKeyDown = (event, callback) => {
+const checkEscKeyDown = (event, callback) => {
   if (event.key === 'Escape') {
     event.preventDefault();
     callback();
@@ -8,11 +8,11 @@ const onEscKeyDown = (event, callback) => {
 };
 
 const showModal = (messageClass, msg = null, callback = null) => {
-  const messageTemplateElement = document.querySelector(`#${messageClass}`).content.cloneNode(true);
-  const messageContainerElement = messageTemplateElement.querySelector(`.${messageClass}`);
-  const messageInnerElement = messageTemplateElement.querySelector(`.${messageClass}__inner`);
-  const messageButtonElement = messageTemplateElement.querySelector(`.${messageClass}__button`);
-  const messageTitleElement = messageTemplateElement.querySelector(`.${messageClass}__title`);
+  const messageFragment = document.querySelector(`#${messageClass}`).content.cloneNode(true);
+  const messageContainerElement = messageFragment.querySelector(`.${messageClass}`);
+  const messageInnerElement = messageFragment.querySelector(`.${messageClass}__inner`);
+  const messageButtonElement = messageFragment.querySelector(`.${messageClass}__button`);
+  const messageTitleElement = messageFragment.querySelector(`.${messageClass}__title`);
   if (msg) {
     messageTitleElement.textContent = msg;
   }
@@ -26,7 +26,7 @@ const showModal = (messageClass, msg = null, callback = null) => {
 
   const onEscKeyModalDown = (event) => {
     event.stopPropagation();
-    onEscKeyDown(event, removeMessageModal);
+    checkEscKeyDown(event, removeMessageModal);
   };
 
   const onOutsideClick = (event) => {
@@ -65,4 +65,4 @@ function debounce(callback, timeoutDelay) {
 
 const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-export { onEscKeyDown, showModal, debounce, shuffleArr };
+export { checkEscKeyDown, showModal, debounce, shuffleArr };

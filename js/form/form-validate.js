@@ -1,4 +1,4 @@
-import { onEscKeyDown } from '../utils.js';
+import { checkEscKeyDown } from '../utils.js';
 import { MAX_HASHTAG_COUNT, HASHTAG_REGEX } from '../constants.js';
 
 const uploadFormElement = document.querySelector('.img-upload__form');
@@ -63,7 +63,7 @@ uploadFormElement.addEventListener('input', () => {
 });
 
 inputTextFormElement.addEventListener('keydown', (event) => {
-  onEscKeyDown(event, () => {
+  checkEscKeyDown(event, () => {
     document.activeElement.blur();
     event.stopPropagation();
   });

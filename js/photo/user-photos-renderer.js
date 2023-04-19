@@ -1,20 +1,20 @@
 import { get } from '../api.js';
 import { debounce, shuffleArr, showModal } from '../utils.js';
 import { RANDOM_PICS_COUNT, RERENDER_DELAY } from '../constants.js';
-import { onUserPictureClick } from './full-size-photo.js';
+import { renderBigPicture } from './full-size-photo.js';
 
 const picturesContainerElement = document.querySelector('.pictures');
 const filterPictureElement = document.querySelector('.img-filters');
 const filterButtonElements = document.querySelectorAll('.img-filters__button');
 
-const createPictureElement = (pictureData) => {
+const createPictureFragment = (pictureData) => {
   const pictureTemplateElement = document.querySelector('#picture');
-  const pictureElement = pictureTemplateElement.content.cloneNode(true);
+  const pictureFragment = pictureTemplateElement.content.cloneNode(true);
 
-  const pictureLinkElement = pictureElement.querySelector('.picture');
-  const pictureImgElement = pictureElement.querySelector('.picture__img');
-  const pictureLikesElement = pictureElement.querySelector('.picture__likes');
-  const pictureCommentsElement = pictureElement.querySelector('.picture__comments');
+  const pictureLinkElement = pictureFragment.querySelector('.picture');
+  const pictureImgElement = pictureFragment.querySelector('.picture__img');
+  const pictureLikesElement = pictureFragment.querySelector('.picture__likes');
+  const pictureCommentsElement = pictureFragment.querySelector('.picture__comments');
 
   pictureLinkElement.href = pictureData.url;
   pictureImgElement.src = pictureData.url;
@@ -22,21 +22,25 @@ const createPictureElement = (pictureData) => {
   pictureLikesElement.textContent = pictureData.likes;
   pictureCommentsElement.textContent = pictureData.comments.length;
 
-  return pictureElement;
+  return pictureFragment;
 };
 
 const renderUserPhotos = (picturesData) => {
   const fragment = document.createDocumentFragment();
 
-  picturesData.forEach((e) => {
-    const pictureElement = createPictureElement(e);
-    fragment.appendChild(pictureElement);
+  picturesData.forEach((pictureData) => {
+    const pictureFragment = createPictureFragment(pictureData);
+
+    pictureFragment.querySelector('.picture').addEventListener('click', (event) => {
+      event.preventDefault();
+      renderBigPicture(pictureData);
+    });
+
+    fragment.appendChild(pictureFragment);
   });
 
   picturesContainerElement.appendChild(fragment);
-  onUserPictureClick(picturesData);
 };
-
 
 const makeButtonActive = (evt) => {
   filterButtonElements.forEach((filter) => {
