@@ -1,5 +1,5 @@
 import { COMMENTS_SHOW_COUNT } from '../constants.js';
-import { onEscKeyDown } from '../utils.js';
+import { checkEscKeyDown } from '../utils.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const socialСommentsCountElement = bigPictureElement.querySelector('.social__comment-count');
@@ -65,7 +65,7 @@ const renderBigPicture = (photoData) => {
   };
 
   const onBigPictureEscKeyDown = (event) => {
-    onEscKeyDown(event, closeBigPicture);
+    checkEscKeyDown(event, closeBigPicture);
   };
 
   function closeBigPicture() {

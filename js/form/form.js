@@ -1,4 +1,4 @@
-import { onEscKeyDown } from '../utils.js';
+import { checkEscKeyDown } from '../utils.js';
 import { post } from '../api.js';
 import { showModal } from '../utils.js';
 import { clearLastFilter } from './editor/filter-control.js';
@@ -30,7 +30,7 @@ const clearInputs = () => {
 };
 
 const onDocumentKeydown = (event) => {
-  onEscKeyDown(event, closeUserModal);
+  checkEscKeyDown(event, closeUserModal);
 };
 
 const openUserModal = () => {

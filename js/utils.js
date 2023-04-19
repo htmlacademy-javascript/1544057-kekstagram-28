@@ -1,6 +1,6 @@
 import { MESSAGE_UPLOAD_SHOW_TIME } from './constants.js';
 
-const onEscKeyDown = (event, callback) => {
+const checkEscKeyDown = (event, callback) => {
   if (event.key === 'Escape') {
     event.preventDefault();
     callback();
@@ -26,7 +26,7 @@ const showModal = (messageClass, msg = null, callback = null) => {
 
   const onEscKeyModalDown = (event) => {
     event.stopPropagation();
-    onEscKeyDown(event, removeMessageModal);
+    checkEscKeyDown(event, removeMessageModal);
   };
 
   const onOutsideClick = (event) => {
@@ -65,4 +65,4 @@ function debounce(callback, timeoutDelay) {
 
 const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-export { onEscKeyDown, showModal, debounce, shuffleArr };
+export { checkEscKeyDown, showModal, debounce, shuffleArr };
